@@ -7,6 +7,7 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class MacroData {
     
@@ -140,7 +141,12 @@ public class MacroData {
     }
     public String getField(int n) {
         if (n <= getEntrySize()) {
-            return items.get(currentEntry).fields[n];
+            try {
+                return items.get(currentEntry).fields[n];
+            } catch (ArrayIndexOutOfBoundsException e) {
+                JOptionPane.showMessageDialog(null, "You have tried to access a field(" + n + ") which does not exist!", "Error", JOptionPane.ERROR_MESSAGE);
+                return "Error; Field does not exist!";
+            }
         } else {
             return getEntrySize() + "<" + n;
         }

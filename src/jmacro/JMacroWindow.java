@@ -102,7 +102,7 @@ public class JMacroWindow extends javax.swing.JFrame {
         setIconImages(null);
         setResizable(false);
 
-        titlePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("JMacro v0.4"));
+        titlePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("JMacro v0.4.1"));
 
         dataButton.setText("...");
         dataButton.addActionListener(new java.awt.event.ActionListener() {

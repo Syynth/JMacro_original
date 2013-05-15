@@ -101,21 +101,27 @@ public class Command {
                     break;
                 case TYPE_AND_WAIT:
                     int hash = commandBody.lastIndexOf("#");
-                    int wait = Integer.parseInt(!commandBody.endsWith("#") ? commandBody.substring(hash+1) : defaultWaitBody);
+                    String typeBody = commandBody.substring(0, hash);
+                    String waitBody = commandBody.substring(hash);
+                    typeBody = typeBody.isEmpty() ? defaultTypeBody : typeBody;
+                    waitBody = "#".equals(waitBody) ? defaultWaitBody : waitBody.substring(1);
+                    System.out.println("Handling>" + commandBody + " [" + typeBody + ", " + waitBody + "]");
+                    
+                    int wait = Integer.parseInt(waitBody);
                     if (!commandBody.startsWith("\"")) {
                         if (Character.isDigit(commandBody.charAt(0))) {
                             try {
-                                r.type(m.macroData.getField(Integer.parseInt(commandBody.substring(0, hash))));
+                                r.type(m.macroData.getField(Integer.parseInt(typeBody)));
                             } catch (NumberFormatException e) {
                                 e.printStackTrace();
                                 JOptionPane.showMessageDialog(null, "2Error handling message: " + commandBody, "Parsing Error", JOptionPane.ERROR_MESSAGE);
                             }
                         } else {
-                            r.keyPress(SmartRobot.getKeyCode(commandBody.substring(0, hash)));
-                            r.keyRelease(SmartRobot.getKeyCode(commandBody.substring(0, hash)));
+                            r.keyPress(SmartRobot.getKeyCode(typeBody));
+                            r.keyRelease(SmartRobot.getKeyCode(typeBody));
                         }
                     } else {
-                        r.type(commandBody.substring(2, commandBody.length() - 2));
+                        r.type(typeBody.substring(1, typeBody.length() - 1));
                     }
                     m.sleep(wait);
                     break;
