@@ -13,7 +13,7 @@ public class MacroData {
     private File data;
     private File macroInstructions;
     private int currentEntry;
-    private HashMap<String, ArrayList<String>> commandMap;
+    private HashMap<String, ArrayList<Command>> commandMap;
     private ArrayList<MacroDataItem> items;
     private SmartRobot bot;
     private JFrame window;
@@ -25,10 +25,10 @@ public class MacroData {
         currentEntry = 0;
         
         commandMap = new HashMap<>();
-        commandMap.put("start", new ArrayList<String>());
-        commandMap.put("item", new ArrayList<String>());
-        commandMap.put("reset", new ArrayList<String>());
-        commandMap.put("end", new ArrayList<String>());
+        commandMap.put("start", new ArrayList<Command>());
+        commandMap.put("item", new ArrayList<Command>());
+        commandMap.put("reset", new ArrayList<Command>());
+        commandMap.put("end", new ArrayList<Command>());
         
         try {
             bot = new SmartRobot();
@@ -107,14 +107,20 @@ public class MacroData {
         while (scan.hasNextLine()) {
             commandData += scan.nextLine() + "\n";
         }
-        commandMap.get("start").addAll(Arrays.asList(commandData.substring(
-            commandData.indexOf("[start]") + 8, commandData.indexOf("[/start]")).split("\n")));
-        commandMap.get("item").addAll(Arrays.asList(commandData.substring(
-            commandData.indexOf("[item]") + 7, commandData.indexOf("[/item]")).split("\n")));
-        commandMap.get("reset").addAll(Arrays.asList(commandData.substring(
-            commandData.indexOf("[reset]") + 8, commandData.indexOf("[/reset]")).split("\n")));
-        commandMap.get("end").addAll(Arrays.asList(commandData.substring(
-            commandData.indexOf("[end]") + 6, commandData.indexOf("[/end]")).split("\n")));
+        
+        Command.define(commandData.substring(commandData.indexOf("[define]") + 9, commandData.indexOf("[/define]")).split("\n"));
+        for (String s : commandData.substring(commandData.indexOf("[start]") + 8, commandData.indexOf("[/start]")).split("\n")) {
+            commandMap.get("start").add(new Command(s));
+        }
+        for (String s : commandData.substring(commandData.indexOf("[item]") + 7, commandData.indexOf("[/item]")).split("\n")) {
+            commandMap.get("item").add(new Command(s));
+        }
+        for (String s : commandData.substring(commandData.indexOf("[reset]") + 8, commandData.indexOf("[/reset]")).split("\n")) {
+            commandMap.get("reset").add(new Command(s));
+        }
+        for (String s : commandData.substring(commandData.indexOf("[end]") + 6, commandData.indexOf("[/end]")).split("\n")) {
+            commandMap.get("end").add(new Command(s));
+        }
     }
     
     public int getNumberOfEntries() {
@@ -129,7 +135,7 @@ public class MacroData {
         }
     }
     public SmartRobot getRobot() { return bot; }
-    public ArrayList<String> getCommandList(String name) {
+    public ArrayList<Command> getCommandList(String name) {
         return commandMap.get(name);
     }
     public String getField(int n) {

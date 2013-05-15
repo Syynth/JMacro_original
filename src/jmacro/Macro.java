@@ -1,5 +1,6 @@
 package jmacro;
 
+import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -43,9 +44,11 @@ public class Macro extends Thread {
         }
         abort = false;
         running = true;
-        for (String cmd : macroData.getCommandList("start")) {
+        for (Command cmd : macroData.getCommandList("start")) {
             if (abort) { break; }
-            executeCommand(cmd);
+            try {
+                cmd.execute(this, macroData.getRobot());
+            } catch (InterruptedException e) {}
         }
         for (int i = 0; i < macroData.getNumberOfEntries(); i++) {
             if (abort) { break; }
@@ -53,32 +56,37 @@ public class Macro extends Thread {
                 i--;
                 continue;
             }
-            for (String cmd : macroData.getCommandList("item")) {
+            for (Command cmd : macroData.getCommandList("item")) {
                 if (abort) { break; }
-                executeCommand(cmd);
-                sleep(200);
+                try {
+                    cmd.execute(this, macroData.getRobot());
+                } catch (InterruptedException e) {}
             }
             if (i > 0) {
                 if (abort) { break; }
-                for (String cmd : macroData.getCommandList("reset")) {
+                for (Command cmd : macroData.getCommandList("reset")) {
                     if (abort) { break; }
-                    executeCommand(cmd);
+                    try {
+                        cmd.execute(this, macroData.getRobot());
+                    } catch (InterruptedException e) {}
                 }
             }
             macroData.advanceEntry();
             if (abort) { break; }
         }
-        for (String cmd : macroData.getCommandList("end")) {
+        for (Command cmd : macroData.getCommandList("end")) {
             if (abort) { break; }
-            executeCommand(cmd);
+            try {
+                cmd.execute(this, macroData.getRobot());
+            } catch (InterruptedException e) {}
         }
         if (abort) {
             JOptionPane.showMessageDialog(null, "Last active record was " +
                     macroData.getCurrentEntry());
         }
-        //macroData.resetEntryPosition();
         abort = false;
         running = false;
+        JMacroWindow.getInstance().resetWindowColor();
     }
     
     private void executeCommand(String cmd) {
@@ -92,7 +100,7 @@ public class Macro extends Thread {
         } else if (c == '>') {
             macroData.getRobot().keyRelease(SmartRobot.getKeyCode(param));
         } else if (c == '@') {
-            if (param.charAt(0) == '"') {
+            if (param.startsWith("\"")) {
                 macroData.getRobot().type(param.substring(1, param.length() - 1));
             } else if (Character.isDigit(param.charAt(0))) {
                 macroData.getRobot().type(macroData.getField(Integer.parseInt(param)));

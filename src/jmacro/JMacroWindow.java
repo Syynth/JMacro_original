@@ -20,6 +20,7 @@ import org.jnativehook.NativeHookException;
 public class JMacroWindow extends javax.swing.JFrame {
 
     public JMacroWindow() {
+        JMacroWindow.mInstance = this;
         mode = Mode.PLAY;
         macroData = new MacroData(this);
         
@@ -388,7 +389,8 @@ public class JMacroWindow extends javax.swing.JFrame {
 
     private void editMacroButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMacroButtonActionPerformed
         if (!formatField.getText().equals("")) {
-            EditDialog ed = new EditDialog(formatField.getText());
+            EditDialog ed = new EditDialog(formatField.getText(), true);
+            ed.linkMacroData(macroData);
             ed.setVisible(true);
             ed.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         }
@@ -419,7 +421,7 @@ public class JMacroWindow extends javax.swing.JFrame {
 
     private void formatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formatButtonActionPerformed
         JFileChooser c;
-        c = new JFileChooser();
+        c = new JFileChooser(System.getProperty("user.dir"));
         c.setFileSelectionMode(JFileChooser.FILES_ONLY);
         c.setFileFilter(new FileNameExtensionFilter("MFL Files", "mfl"));
         c.showDialog(this, null);
@@ -432,7 +434,7 @@ public class JMacroWindow extends javax.swing.JFrame {
 
     private void dataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dataButtonActionPerformed
         JFileChooser c;
-        c = new JFileChooser();
+        c = new JFileChooser(System.getProperty("user.dir"));
         c.setFileSelectionMode(JFileChooser.FILES_ONLY);
         c.setFileFilter(new FileNameExtensionFilter("CSV Files", "csv"));
         c.showDialog(this, null);
@@ -539,6 +541,10 @@ public class JMacroWindow extends javax.swing.JFrame {
         });
     }
     
+    public static JMacroWindow getInstance() {
+        return mInstance;
+    }
+    
     private enum Mode {
         PLAY,
         INSERT,
@@ -549,6 +555,7 @@ public class JMacroWindow extends javax.swing.JFrame {
     private GlobalKeyListener gkl;
     private Color bgColor;
     private Mode mode;
+    private static JMacroWindow mInstance;
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton dataButton;
