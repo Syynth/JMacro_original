@@ -23,12 +23,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jTabbedPane1" alignment="0" pref="234" max="32767" attributes="0"/>
+          <Component id="jTabbedPane1" alignment="0" pref="372" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jTabbedPane1" alignment="0" pref="346" max="32767" attributes="0"/>
+          <Component id="jTabbedPane1" alignment="0" pref="546" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -56,7 +56,7 @@
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
-                <Property name="text" type="java.lang.String" value="[start]&#xa;[/start]&#xa;&#xa;[item]&#xa;[/item]&#xa;&#xa;[reset]&#xa;[/reset]&#xa;&#xa;[end]&#xa;[/end]"/>
+                <Property name="text" type="java.lang.String" value="[define]&#xa;[/define]&#xa;&#xa;[start]&#xa;[/start]&#xa;&#xa;[item]&#xa;[/item]&#xa;&#xa;[reset]&#xa;[/reset]&#xa;&#xa;[end]&#xa;[/end]"/>
               </Properties>
             </Component>
           </SubComponents>

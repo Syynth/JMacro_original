@@ -39,7 +39,7 @@ public class InfoDialog extends javax.swing.JFrame {
         jTextArea2.setEditable(false);
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
-        jTextArea2.setText("[start]\n[/start]\n\n[item]\n[/item]\n\n[reset]\n[/reset]\n\n[end]\n[/end]");
+        jTextArea2.setText("[define]\n[/define]\n\n[start]\n[/start]\n\n[item]\n[/item]\n\n[reset]\n[/reset]\n\n[end]\n[/end]");
         jScrollPane2.setViewportView(jTextArea2);
 
         jTabbedPane1.addTab("MFL Structure", jScrollPane2);
@@ -63,11 +63,11 @@ public class InfoDialog extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE)
         );
 
         pack();
