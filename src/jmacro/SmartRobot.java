@@ -106,6 +106,23 @@ public class SmartRobot extends java.awt.Robot {
         if (s.equals("shift")) { code = KeyEvent.VK_SHIFT; }
         if (s.equals("alt")) { code = KeyEvent.VK_ALT; }
         if (s.equals("escape")) { code = KeyEvent.VK_ESCAPE; }
+        if (s.equals("f1")) { code = KeyEvent.VK_F1; }
+        if (s.equals("f2")) { code = KeyEvent.VK_F2; }
+        if (s.equals("f3")) { code = KeyEvent.VK_F3; }
+        if (s.equals("f4")) { code = KeyEvent.VK_F4; }
+        if (s.equals("f5")) { code = KeyEvent.VK_F5; }
+        if (s.equals("f6")) { code = KeyEvent.VK_F6; }
+        if (s.equals("f7")) { code = KeyEvent.VK_F7; }
+        if (s.equals("f8")) { code = KeyEvent.VK_F8; }
+        if (s.equals("f9")) { code = KeyEvent.VK_F9; }
+        if (s.equals("f10")) { code = KeyEvent.VK_F10; }
+        if (s.equals("f11")) { code = KeyEvent.VK_F11; }
+        if (s.equals("f12")) { code = KeyEvent.VK_F12; }
+        if (s.equals("insert")) { code = KeyEvent.VK_INSERT; }
+        if (s.equals("delete")) { code = KeyEvent.VK_DELETE; }
+        if (s.equals("pageup")) { code = KeyEvent.VK_PAGE_UP; }
+        if (s.equals("pagedown")) { code = KeyEvent.VK_PAGE_DOWN; }
+        if (s.equals("super")) { code = KeyEvent.VK_WINDOWS; }
         return code;
     }
 }
